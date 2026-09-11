@@ -99,7 +99,8 @@ input {
 }
 
 .search-form input:focus-visible,
-#search-button:focus-visible {
+#search-button:focus-visible,
+#clear-button:focus-visible {
   outline: 3px solid rgba(191, 219, 254, 0.9);
   outline-offset: 2px;
 }
@@ -128,6 +129,21 @@ input {
 #search-button:disabled {
   opacity: 0.7;
   cursor: progress;
+}
+
+#clear-button {
+  height: var(--input-height);
+  padding: 0 20px;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  border-radius: 18px;
+  background: transparent;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#clear-button:hover {
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .field-error {
@@ -206,6 +222,12 @@ input {
   gap: 20px;
 }
 
+.weather-summary,
+.weather-details,
+.location-map {
+  min-width: 0;
+}
+
 .weather-summary {
   background: #1b2128;
   border: 1px solid var(--panel-border);
@@ -279,12 +301,13 @@ input {
 
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(140px, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
   width: 100%;
 }
 
 .stat-card {
+  min-width: 0;
   background: var(--soft-bg);
   border: 1px solid var(--panel-border);
   border-radius: 18px;
@@ -299,6 +322,7 @@ input {
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
+  overflow-wrap: anywhere;
 }
 
 .stat-card .stat-icon {
@@ -372,7 +396,8 @@ input {
   }
 
   .search-form input,
-  #search-button {
+  #search-button,
+  #clear-button {
     width: 100%;
   }
 
@@ -382,6 +407,16 @@ input {
 
   .stats-grid {
     grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 980px) and (min-width: 701px) {
+  .weather-layout {
+    grid-template-columns: minmax(220px, 0.85fr) minmax(0, 1.15fr);
+  }
+
+  .location-map {
+    grid-column: 1 / -1;
   }
 }
 

@@ -34,6 +34,7 @@ app.innerHTML = `
         <div class="input-row">
           <input id="city-input" name="city" type="text" placeholder="Digite uma cidade" maxlength="80" autocomplete="off" />
           <button id="search-button" type="submit">Buscar</button>
+          <button id="clear-button" type="button">Limpar</button>
         </div>
         <p id="field-error" class="field-error" aria-live="polite"></p>
       </form>
@@ -46,6 +47,7 @@ app.innerHTML = `
 const form = document.querySelector<HTMLFormElement>('#weather-form')!
 const cityInput = document.querySelector<HTMLInputElement>('#city-input')!
 const searchButton = document.querySelector<HTMLButtonElement>('#search-button')!
+const clearButton = document.querySelector<HTMLButtonElement>('#clear-button')!
 const resultPanel = document.querySelector<HTMLElement>('#result-panel')!
 const fieldError = document.querySelector<HTMLParagraphElement>('#field-error')!
 
@@ -91,6 +93,20 @@ function renderCurrentState(): void {
 
   resultPanel.innerHTML = renderEmptyState()
 }
+
+clearButton.addEventListener('click', () => {
+  if (activeController) {
+    activeController.abort()
+    activeController = null
+  }
+
+  cityInput.value = ''
+  clearFieldError()
+  currentState = 'empty'
+  setLoadingState(false)
+  renderCurrentState()
+  cityInput.focus()
+})
 
 form.addEventListener('submit', async (event) => {
   event.preventDefault()
