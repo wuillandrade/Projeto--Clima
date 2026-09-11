@@ -1,5 +1,4 @@
-cls
-git add:root {
+:root {
   --page-bg: #090b0e;
   --panel-bg: #ffffff;
   --panel-border: #2b333d;
